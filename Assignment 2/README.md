@@ -1,7 +1,7 @@
 # Linked Bag, Algorithm Efficiency, Stack Implementation, Recursion
 
-A. Linked Bag Remove All Occurrances
-B. Algorithm Efficiency Measurement
-C. Palindromes - Stack Implementation
-D. Recursion - Blurbs
-E. Recursion - Pascal's Triangle
+1. Part A: Linked Bag Remove All Occurrances
+2. Part B: Algorithm Efficiency Measurement
+3. Part C: Palindromes - Stack Implementation
+4. Part D: Recursion - Blurbs
+5. Part E: Recursion - Pascal's Triangle
