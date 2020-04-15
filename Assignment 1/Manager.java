@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 /**
  * SFSU CSC220 Data Structures
@@ -8,7 +8,7 @@ package asmt01;
 public class Manager extends FrontOffice {
 
     private final String POSITION = "Manager";
-    private Club baseballClub;
+    //private Club baseballClub; UNNECESSARY declaration -- inherited from FrontOffice
 
     public Manager() {
 

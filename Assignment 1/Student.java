@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +11,9 @@ import java.util.Arrays;
 public class Student extends Person {
 
     public static final String SCHOOL_NAME = "San Francisco State University";
-    private final ArrayList<Card> cards = new ArrayList();
     private String schoolEmailAddress;
     private int numCards;
+    private final ArrayList<Card> cards = new ArrayList();
 
     public Student() {
     }

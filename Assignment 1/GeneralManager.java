@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 /**
  * SFSU CSC220 Data Structures
@@ -8,8 +8,8 @@ package asmt01;
 public class GeneralManager extends FrontOffice {
 
     private final String POSITION = "General Manager";
-    
-    private Club baseballClub;
+
+    //private Club baseballClub;
 
     public GeneralManager() {
 

@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,21 +31,22 @@ public class ChatSession {
     // Club - Player - Student
     private final Club club;
     private final String clubPrompt;
-    private final Player player;
-    private final String playerPrompt;
     private final Student student;
+    private Player player;
+    private String playerPrompt;
     private String studentPrompt;
+    private int randomPlayer;
  
     // Quiz
     private final Quiz quiz;
     private Boolean allCorrect = true;
     
     // Log
-    private static final String LOG_FILE_ABSOLUTE_PATH = "C:\\Users\\Mark\\Documents\\NetBeansProjects\\CSC 220.01\\src\\asmt01";
+    private static final String LOG_FILE_ABSOLUTE_PATH = "C:/Users/Mark/Documents/NetBeansProjects/CSC220.01_Assignment_01EC/src/asmt01ec/";
     private final ArrayList<String> logData;
     private String logFileRelativePath;
     private Log log;
-        
+   
     // Constructor
     public ChatSession() {
         this.club = new Club();
@@ -54,10 +55,24 @@ public class ChatSession {
         this.playerPrompt = this.player.toString() + ": ";
         this.student = new Student();
         this.studentPrompt = new String();
-        this.messages = new String[17];
+        this.messages = new String[22];
         this.quiz = new Quiz();
         this.startTime = new String();
         this.endTime = new String();
+        this.logData = new ArrayList();
+    }
+    
+        public ChatSession(Club club) {
+        this.club = club;
+        // this.player = player;
+        this.clubPrompt = this.club.getShortName() + ": ";
+        // this.playerPrompt = this.player.toString() + ": ";
+        this.student = new Student();
+        this.studentPrompt = new String();
+        this.messages = new String[22];   
+        this.quiz = new Quiz();
+        this.startTime = new String();
+        this.endTime = new String ();
         this.logData = new ArrayList();
     }
     
@@ -65,10 +80,9 @@ public class ChatSession {
         this.club = club;
         this.player = player;
         this.clubPrompt = this.club.getShortName() + ": ";
-        this.playerPrompt = this.player.toString() + ": ";
         this.student = new Student();
         this.studentPrompt = new String();
-        this.messages = new String[17];   
+        this.messages = new String[22];   
         this.quiz = new Quiz();
         this.startTime = new String();
         this.endTime = new String ();
@@ -108,7 +122,7 @@ public class ChatSession {
         this.student.setLastName(input.next());  // Last Name
         System.out.print(this.messages[3]);
         this.student.setSchoolEmailAddress(input.next()); // schoolEmailAddress
-        this.studentPrompt = this.student.toString() + ": ";
+        this.studentPrompt = this.student.toString() + ": "; // Store studentPrompt
         
         // Set Messages
         this.messages[6] = "Hello " + this.student.getFirstName() + "! C-O-N-G-R-A-T-U-L-A-T-I-O-N-S! ";
@@ -122,8 +136,37 @@ public class ChatSession {
         this.messages[14] = "See you at the summer games!!!";
         this.messages[15] = "\n***FREE tickets to summer games!***";
         this.messages[16] = "Thank you!";
+        
+        // Extra Credit Messages
+        this.messages[17] = "Please choose an option for your chat session:"
+                + "\n\t1.\tYou are adventurous and would like us to choose a player for you to chat with, or"
+                + "\n\t2.\tYou like things predictable and want to choose yourself.";
+        this.messages[18] = "Gambler, eh? Great! We'll find you a player to chat with.";
+        this.messages[19] = "You know what you want! Alright. Here is a convenient list of our roster that you can choose from:"
+                + "\n\tPlease enter the number for who you'd like to chat with.";
+        this.messages[20] = "Thank you. Connecting you with " + this.club.getPlayers().get(randomPlayer).getFirstName() + " " + this.club.getPlayers().get(randomPlayer).getLastName() + ".";
+        this.messages[21] = "Sorry, that wasn't a valid selection. We'll choose a player for you";
     }
-
+    
+    // Student chooses Player or random Player
+    private void studentPlayerChoice() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(this.clubPrompt + this.messages[17]);
+        System.out.print(this.studentPrompt);
+        int chatOption = input.nextInt();
+        input.nextLine();
+        switch (chatOption) {
+            case 1: this.playerRandomizer();
+                    break;
+            case 2: this.playerChoice();
+                    break;
+            default: System.out.println(this.messages[21]);
+                    this.playerRandomizer();
+                    break;
+        }
+        this.playerPrompt = this.player.toString() + ": ";
+    }
+    
     // Connect Student w/ Player
     private void connectStudentPlayer() {
 
@@ -240,13 +283,33 @@ public class ChatSession {
                 + "_" + this.student.getSchoolEmailAddress()
                 + ".txt";
         this.log = new Log(this.startTime, this.endTime, this.player, this.student, this.logData,
-            this.LOG_FILE_ABSOLUTE_PATH, this.logFileRelativePath, logFileName);
-        this.log.writeLogToFile(this.logFileRelativePath, logFileName, this.logData);
+            ChatSession.LOG_FILE_ABSOLUTE_PATH, this.logFileRelativePath, logFileName);
+        this.log.writeLogToFile(this.log.getLogFileRelativePath(), logFileName, this.logData);
     }
-
+    
+    // Chooses random player
+    private void playerRandomizer() {
+        System.out.println(this.clubPrompt + this.messages[18]);
+        this.randomPlayer = (int)(Math.random() * this.club.getPlayersSize());
+        // System.out.println(this.messages[20]);
+        this.player = this.club.getPlayers().get(randomPlayer);
+    }
+    
+    // Allows student to choose player
+    private void playerChoice() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(this.clubPrompt + this.messages[19]);
+        this.club.listPlayerChoice();
+        System.out.print(this.studentPrompt);
+        int chosenPlayer = input.nextInt() - 1;
+        input.nextLine();
+        this.player = this.club.getPlayers().get(chosenPlayer);
+    }
+    
     // A Chat Session
     public void runChatSession() {
         this.startChatSession();
+        this.studentPlayerChoice();
         this.connectStudentPlayer();
         this.chatStudentPlayer();
         this.runQuiz();

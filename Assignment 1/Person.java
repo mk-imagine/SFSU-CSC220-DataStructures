@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 /**
  * SFSU CSC220 Data Structures
