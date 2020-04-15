@@ -1,2 +1,2 @@
-# CSC-220 - Data Structures
+# CSC-220 Data Structures
 Data Structures in Java
