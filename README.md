@@ -1,2 +1,2 @@
-# SFSU-CSC220-Data-Structures
+# CSC220 - Data Structures
 Data Structures in Java
