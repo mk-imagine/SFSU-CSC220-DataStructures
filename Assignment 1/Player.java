@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 /**
  * SFSU CSC220 Data Structures
@@ -7,11 +7,11 @@ package asmt01;
  */
 public class Player extends Person {
 
-    private Club club;
     private String position;
     private String bats;
     private String throwz;
     private int yearMLBDebut;
+    private Club club;
     private int number;
 
     public Player() {

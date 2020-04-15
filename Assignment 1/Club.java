@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +49,9 @@ public class Club {
     }
     
     
+    public void addPlayers(Player[] players) {
+        this.players = new ArrayList<>(Arrays.asList(players));
+    }
     
     /*
      * GETTERS
@@ -57,6 +60,10 @@ public class Club {
     // Player[]
     public ArrayList<Player> getPlayers() {
         return this.players;
+    }
+    
+    public int getPlayersSize() {
+        return this.players.size();
     }
     
     // Official Name of Club
@@ -70,15 +77,6 @@ public class Club {
     }
     
     /*
-     * SETTERS
-     */
-    
-    public void addPlayers(Player[] players) {
-        this.players = new ArrayList<>(Arrays.asList(players));
-    }
-    
-    
-    /*
      * DISPLAY METHODS
      */
     
@@ -88,6 +86,13 @@ public class Club {
         this.players.forEach((player) -> {
             System.out.println(player + " ");
         });
+    }
+    
+    // List of Players for Student to choose from
+    public void listPlayerChoice() {
+        for (int i = 0; i < this.players.size(); i++) {
+            System.out.println("\t\t" + (i + 1) + ".\t" + this.players.get(i).getFirstName() + " " + this.players.get(i).getLastName());
+        }
     }
     
     /*

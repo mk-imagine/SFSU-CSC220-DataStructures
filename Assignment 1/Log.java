@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class Log {
 
     private final String LOG_FILE_RELATIVE_PATH;
-    private final ArrayList<String> logData;
-    private final String logFileRelativePath;
-    private Player player;
-    private Student student;
     private String startTime;
     private String endTime;
+    private Player player;
+    private Student student;
+    private final ArrayList<String> logData;
     private String logFileAbsolutePath;
+    private final String logFileRelativePath;
     private String logFileName;
 
     public Log() {
@@ -27,7 +27,7 @@ public class Log {
         /**
          * ************* Please match your file path ***********************
          */
-        this.LOG_FILE_RELATIVE_PATH = "src/asmt01/";
+        this.LOG_FILE_RELATIVE_PATH = "src/asmt01ec/";
         this.logFileRelativePath = this.LOG_FILE_RELATIVE_PATH;
     }
 
@@ -36,7 +36,7 @@ public class Log {
         /**
          * ************* Please match your file path ***********************
          */
-        this.LOG_FILE_RELATIVE_PATH = "src/asmt01/";
+        this.LOG_FILE_RELATIVE_PATH = "src/asmt01ec/";
         this.startTime = startTime;
         this.endTime = endTime;
         this.player = player;
@@ -66,7 +66,7 @@ public class Log {
     public void writeLogToFile(String relativePath, String fileName, ArrayList<String> log) {
         
         String filePath = relativePath + fileName;
-        try (FileWriter fw = new FileWriter(fileName); BufferedWriter bw = new BufferedWriter(fw)) {
+        try (FileWriter fw = new FileWriter(filePath); BufferedWriter bw = new BufferedWriter(fw)) {
             for (int i = 0; i < log.size(); i++) {
                   bw.write(log.get(i), 0, log.get(i).length());
                   bw.newLine();

@@ -1,4 +1,4 @@
-package asmt01;
+package asmt01ec;
 
 import java.util.ArrayList;
 import java.util.Scanner;
